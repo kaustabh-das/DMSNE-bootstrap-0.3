@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+    <style>
+        .responsive__wrapper{
+            padding: 0 1rem;
+            display:flex;
+            float: left;
+            width: auto;
+            margin: 2rem 0;
+        }
+        /* .responsive__wrapper{
+            width: 100%;
+            max-width: 122.5rem;
+            margin: 0 auto;
+            padding: 0 2.4rem;
+        } */
+        .info_section{
+            margin: 2rem;
+        }
+        .des{
+            font-size: 1.5rem;
+        }
+        .price{
+            font-size: xx-large;
+            margin-bottom: 4rem;
+        }
+        .button {
+            padding: 1rem 3rem;
+            margin-left: none;
+            margin-bottom: 1rem;
+            border: none;
+            background: red;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            transition: 0.3s ease;
+            text-decoration: none;
+            text-align: left;
+            border-radius: 4px;
+        }
+        .button:hover {
+            background: black;
+        }
+
+         @media screen and (max-width: 700px) {
+            .responsive__wrapper {
+                flex-direction: column;
+                align-items: center; 
+                /* margin:auto; */
+             }
+            
+            .info_section{
+                /* margin-left: 0.5rem; */
+                width: 100%;
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+            /* .des{
+            font-size: x-large;
+            } */
+            .price{
+                margin-bottom: 2rem;
+                font-size: xx-large;
+            }
+            .button {
+            padding: 1rem 3rem;
+            margin-left: none;
+            margin-bottom: 1rem;
+            border: none;
+            background: red;
+            color: white;
+            font-size: x-large;
+            cursor: pointer;
+            outline: none;
+            transition: 0.3s ease;
+            text-decoration: none;
+            text-align: left;
+            border-radius: 4px;
+        }
+            /* .responsive__card {
+                min-width: 30vw;
+                min-height: auto;
+                margin-bottom: 2rem;
+            } */
+        } 
+    </style>
+</head>
+<body>
+    <div class="responsive__wrapper" >
+        <!-- <div class="responsive__card">     -->
+            <div id = "img" class="image" ></div>
+            <div id="body" class="info_section">
+                <!-- <button id="clear" class="btn btn-primary" onclick="clearStorage()">View Details</button> -->
+                
+                <!-- <img id="pImg" src="" height="125px" width="200px alt=""> -->
+                <!-- <h4>Name:<span id="name"></span></h4>
+                <h4>about:<span id="about"></span></h4>
+                <div id="price"><p>Price:<span> </span></p></div> -->
+        
+            </div>
+
+        <!-- </div> -->
+    </div>
+
+     <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyB0a4DzMC3m0VMqC7lDVaZRZnnU4_qdO5E",
+        authDomain: "dmsne-9e4af.firebaseapp.com",
+        databaseURL: "https://dmsne-9e4af-default-rtdb.firebaseio.com",
+        projectId: "dmsne-9e4af",
+        storageBucket: "dmsne-9e4af.appspot.com",
+        messagingSenderId: "734166094368",
+        appId: "1:734166094368:web:3dd48a191f6aa21a1ca245",
+        measurementId: "G-9H6HC2597Z"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    </script>
+       
+     <script type="text/javascript">
+       product_no = localStorage.getItem("textvalue");
+       loc = localStorage.getItem("textvalue2");
+       console.log(name);
+       firebase.database().ref(loc).child(product_no).on('value',(snap)=>{
+       // console.log(snap.val());
+        let  about = snap.val().about;
+        let  name = snap.val().name;
+        let price = snap.val().price;
+        //  let imgObj = snap.child("image").val();
+        //  let img = imgObj.img;
+        let img = snap.val().img;
+        let imgloc = document.getElementById("img");
+        let bodyloc = document.getElementById("body");
+        console.log(img);
+
+        let str = `<img id="pImg" src="${img}" width="500" height="500" alt="">`;
+        imgloc.innerHTML = str;
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+                document.getElementById("pImg").width = "320";
+                document.getElementById("pImg").height = "350";
+            } 
+        }
+
+        var x = window.matchMedia("(max-width: 700px)");
+        myFunction(x); // Call listener function at run time
+        // x.addListener(myFunction) // Attach listener function on state changes
+
+
+        //  document.getElementById("img").innerHTML = img;
+        //  document.getElementById("name").innerHTML = name; 
+        //  document.getElementById("about").innerHTML = about;
+        //  document.getElementById("price").innerHTML = price;
+        
+
+        
+        let body_str = ` <div class="des"><h1>${name}</h1></div>
+                        <p class="des" width="300" height="700">${about}</p>
+                        <button type="button" class="button" id="buy_button">Contact Details</button>
+                        <p class="contact" id="contact"></p>`;
+        bodyloc.innerHTML = body_str;
+
+        let buy_button = document.getElementById("buy_button");
+        let contact = document.getElementById("contact");
+
+        const buyButton = () => {
+            contact.innerHTML = `To Buy This Product contact: 7002280187 or 9435481533`;
+        }       
+        buy_button.addEventListener("click", buyButton);
+      });
+      
+     </script>
+      
+</body>
+</html>
