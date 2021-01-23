@@ -221,8 +221,12 @@ header{
         font-size: 1.5rem !important;
     }
     .banner {
-        height: 71vh !important;
+        margin-top: 3.3rem !important;
+        height: 40vh !important;
     }
+    /*.carousel-item img {
+        margin-top: 5rem;
+    }*/
 }
 
 /* Membership Section */
