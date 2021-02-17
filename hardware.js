@@ -59,7 +59,7 @@ firebase.database().ref('hardware').on('value',(snap)=>{
                let tName = event.target.tagName;
                if(tName == "BUTTON"){
                    pInfo = event.target.id;
-                   loc = "categories/hardware";
+                   loc = "hardware";
                    localStorage.setItem("textvalue", pInfo);
                    localStorage.setItem("textvalue2", loc);
                    window.location.href = "info.html";
