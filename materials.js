@@ -13,7 +13,7 @@ const materials = document.getElementById("materials");
 
 let footer_str = "";
 
-firebase.database().ref('categories/printing_material').on('value',(snap)=>{
+firebase.database().ref('printing_material').on('value',(snap)=>{
     console.log(snap.val());
      let a = snap.child().key;
      console.log(a);   
@@ -60,7 +60,7 @@ firebase.database().ref('categories/printing_material').on('value',(snap)=>{
                let tName = event.target.tagName;
                if(tName == "BUTTON"){
                    pInfo = event.target.id;
-                   loc = "categories/printing_material";
+                   loc = "printing_material";
                    localStorage.setItem("textvalue", pInfo);
                    localStorage.setItem("textvalue2", loc);
                    window.location.href = "info.html";
