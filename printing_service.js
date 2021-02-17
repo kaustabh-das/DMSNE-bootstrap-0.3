@@ -8,7 +8,7 @@ const printing = document.getElementById("printing");
 
 let footer_str = "";
 
-firebase.database().ref('categories/printing service').on('value',(snap)=>{
+firebase.database().ref('printing service').on('value',(snap)=>{
     console.log(snap.val());
      let a = snap.child().key;
      console.log(a);   
@@ -54,7 +54,7 @@ firebase.database().ref('categories/printing service').on('value',(snap)=>{
                let tName = event.target.tagName;
                if(tName == "BUTTON"){
                    pInfo = event.target.id;
-                   loc = "categories/printing service";
+                   loc = "printing service";
                    localStorage.setItem("textvalue", pInfo);
                    localStorage.setItem("textvalue2", loc);
                    window.location.href = "info.html";
