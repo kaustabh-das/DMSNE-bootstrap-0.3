@@ -8,7 +8,7 @@ const hardware = document.getElementById("hardware");
 
 let footer_str = "";
 
-firebase.database().ref('categories/hardware').on('value',(snap)=>{
+firebase.database().ref('hardware').on('value',(snap)=>{
     console.log(snap.val());
      let a = snap.child().key;
      console.log(a);   
